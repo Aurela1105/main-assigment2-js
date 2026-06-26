@@ -62,18 +62,18 @@ Choose your weapon:
 📄 Paper
 ✂️ Scissors`
         );
-
         if (playerSelection === null) {
             console.log("🚪 Mission aborted.");
             return;
         }
+        playerSelection=playerSelection.toLowerCase();
 
         playerSelection = playerSelection.trim();
 
         if (
-            playerSelection.toLowerCase() !== "rock" &&
-            playerSelection.toLowerCase() !== "paper" &&
-            playerSelection.toLowerCase() !== "scissors"
+            playerSelection !== "rock" &&
+            playerSelection !== "paper" &&
+            playerSelection !== "scissors"
         ) {
             console.log("");
             console.log("❌ Invalid weapon!");
@@ -91,7 +91,7 @@ Choose your weapon:
 
         console.log("");
         console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-        console.log(`⚔️ ROUND ${round}`);
+        console.log(`⚔️ ROUND ${validRoundsPlayed}`);
         console.log(`👤 You: ${capitalize(playerSelection)}`);
         console.log(`🤖 Evil AI: ${computerSelection}`);
         console.log(result);
