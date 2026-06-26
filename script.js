@@ -33,7 +33,7 @@ function game() {
 
     let playerScore = 0;
     let computerScore = 0;
-    let round = 1;
+    let validRoundsPlayed = 1;
 
     console.clear();
 
@@ -51,10 +51,10 @@ function game() {
     console.log("⚖️ Ties do NOT count.");
     console.log("══════════════════════════════════════════════");
 
-    while (round <= 5) {
+    while (validRoundsPlayed <= 5) {
 
         let playerSelection = prompt(
-`⚔️ ROUND ${round} OF 5 ⚔️
+`⚔️ ROUND ${validRoundsPlayed} OF 5 ⚔️
 
 Choose your weapon:
 
@@ -78,7 +78,7 @@ Choose your weapon:
             console.log("");
             console.log("❌ Invalid weapon!");
             console.log("Choose Rock, Paper or Scissors.");
-            console.log(`🔁 Round ${round} will be repeated.`);
+            console.log(`🔁 Round ${validRoundsPlayed} will be repeated.`);
             continue;
         }
 
@@ -100,13 +100,12 @@ Choose your weapon:
 
             console.log("⚖️ It's a tie!");
             console.log("🔁 Round repeated.");
-
-            continue;
         }
 
         if (result.includes("You Win")) {
 
             playerScore++;
+            validRoundsPlayed++;
 
             console.log("🎉 You win this round!");
             console.log("💥 The Evil AI is weakening!");
@@ -114,6 +113,7 @@ Choose your weapon:
         } else {
 
             computerScore++;
+             validRoundsPlayed++;
 
             console.log("😈 The Evil AI wins this round!");
             console.log('"You cannot stop me..."');
@@ -123,7 +123,6 @@ Choose your weapon:
         console.log(`👤 You: ${playerScore}`);
         console.log(`🤖 Evil AI: ${computerScore}`);
 
-        round++;
     }
 
     console.log("");
