@@ -22,3 +22,21 @@ function playRound (playerSelection, computerSelection) {
         return `You Lose! ${computerSelection} beats ${playerSelection}`;
     }
 }
+function getPlayerChoice() {
+    let keepLooping = true;
+    let userInput;
+    while (keepLooping) {
+        userInput = prompt ("Enter your choice: Rock, Paper, or Scissors?");
+        if (userInput === null) {
+            alert("Game Cancelled. Refresh to play again!");
+            return null;
+        }
+        let formattedInput = userInput.trim().toLowerCase();
+        if (formattedInput === 'rock' || formattedInput == 'paper' || formattedInput === 'scissors') {
+            keepLooping = false;
+        } else {
+            alert("Invalid choice! Please typr Rock, Paper, or Scissors");
+        }
+    }
+    return userInput;
+}
