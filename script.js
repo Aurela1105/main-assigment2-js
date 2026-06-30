@@ -37,65 +37,50 @@ function playRound(playerSelection, computerSelection) {
     return `💀 You Lose! ${capitalize(computer)} beats ${capitalize(player)}`;
 }
 
-function game() {
-
-    let playerScore = 0;
-    let computerScore = 0;
-    let validRoundsPlayed = 1;
-
-    console.clear();
-
-    console.log("🧨🤖🔥 ROCK PAPER SCISSORS - EVIL AI EDITION 🔥🤖🧨");
-    console.log("══════════════════════════════════════════════");
-    console.log("⚠️  ALERT!");
-    console.log("The Evil AI has hacked the world's computers.");
-    console.log("Branko has disappeared...");
-    console.log("You are humanity's last hope.");
-    console.log("");
-    console.log("🎯 Mission:");
-    console.log("✅ Win more rounds than the Evil AI.");
-    console.log("✅ Complete 5 VALID rounds.");
-    console.log("❌ Invalid answers repeat the same round.");
-    console.log("⚖️ Ties do NOT count.");
-    console.log("══════════════════════════════════════════════");
-
-    while (validRoundsPlayed <= 5) {
-
+function getPlayerChoice(roundNumber) {
+    while (true) {
         let playerSelection = prompt(
-`⚔️ ROUND ${validRoundsPlayed} OF 5 ⚔️
+`⚔️ ROUND ${roundNumber} OF 5 ⚔️
 
 Choose your weapon:
-
 🪨 Rock
 📄 Paper
 ✂️ Scissors`
         );
         if (playerSelection === null) {
+            return null; 
+        }
+
+        playerSelection = playerSelection.toLowerCase().trim();
+        if (
+            playerSelection === "rock" ||
+            playerSelection === "paper" ||
+            playerSelection === "scissors"
+        ) {
+            return playerSelection; 
+        }
+        console.log("\n❌ Invalid weapon! Choose Rock, Paper or Scissors.");
+        console.log(`🔁 Round ${roundNumber} will be repeated.`);
+    }
+}
+function game() {
+    let playerScore = 0;
+    let computerScore = 0;
+    let validRoundsPlayed = 1;
+
+    console.clear();
+    console.log("🧨🤖🔥 ROCK PAPER SCISSORS - EVIL AI EDITION 🔥🤖🧨");
+    console.log("══════════════════════════════════════════════");
+
+    while (validRoundsPlayed <= 5) {
+                const playerSelection = getPlayerChoice(validRoundsPlayed);
+        if (playerSelection === null) {
             console.log("🚪 Mission aborted.");
             return;
         }
-        playerSelection=playerSelection.toLowerCase();
-
-        playerSelection = playerSelection.trim();
-
-        if (
-            playerSelection !== "rock" &&
-            playerSelection !== "paper" &&
-            playerSelection !== "scissors"
-        ) {
-            console.log("");
-            console.log("❌ Invalid weapon!");
-            console.log("Choose Rock, Paper or Scissors.");
-            console.log(`🔁 Round ${validRoundsPlayed} will be repeated.`);
-            continue;
-        }
 
         const computerSelection = computerPlay();
-
-        const result = playRound(
-            playerSelection,
-            computerSelection
-        );
+        const result = playRound(playerSelection, computerSelection);
 
         console.log("");
         console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
@@ -105,66 +90,29 @@ Choose your weapon:
         console.log(result);
 
         if (result === "Tie") {
-
-            console.log("⚖️ It's a tie!");
-            console.log("🔁 Round repeated.");
+            console.log("⚖️ It's a tie!\n🔁 Round repeated.");
+            console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            continue; 
         }
 
         if (result.includes("You Win")) {
-
             playerScore++;
             validRoundsPlayed++;
-
-            console.log("🎉 You win this round!");
-            console.log("💥 The Evil AI is weakening!");
-
+            console.log("🎉 You win this round!\n💥 The Evil AI is weakening!");
         } else {
-
             computerScore++;
-             validRoundsPlayed++;
-
-            console.log("😈 The Evil AI wins this round!");
-            console.log('"You cannot stop me..."');
+            validRoundsPlayed++;
+            console.log("😈 The Evil AI wins this round!\n\"You cannot stop me...\"");
         }
 
-        console.log(`📊 SCORE`);
-        console.log(`👤 You: ${playerScore}`);
-        console.log(`🤖 Evil AI: ${computerScore}`);
-
+        console.log(`📊 SCORE ➡️ 👤 You: ${playerScore} | 🤖 Evil AI: ${computerScore}`);
     }
-
-    console.log("");
-    console.log("════════════════════════════════════");
-    console.log("🏁 GAME OVER 🏁");
-    console.log("════════════════════════════════════");
-
-    console.log(`Final Score`);
-    console.log(`👤 You: ${playerScore}`);
-    console.log(`🤖 Evil AI: ${computerScore}`);
-    console.log("");
-
+    console.log("\n════════════════════════════════════\n🏁 GAME OVER 🏁\n════════════════════════════════════");
     if (playerScore > computerScore) {
-
-        console.log("🎉🎉🎉 VICTORY! 🎉🎉🎉");
-        console.log("You defeated the Evil AI!");
-        console.log("🌍 Humanity is safe.");
-        console.log("🦸 Branko has been rescued.");
-        console.log("🏆 You are the world's greatest coder!");
-
+        console.log("🎉🎉🎉 VICTORY! You defeated the Evil AI! 🌍");
     } else if (computerScore > playerScore) {
-
-        console.log("💀💀💀 DEFEAT 💀💀💀");
-        console.log("The Evil AI has taken over.");
-        console.log("🤖 All computers belong to the machines.");
-        console.log("🔁 Type game() and fight again!");
-
+        console.log("💀💀💀 DEFEAT! The Evil AI has taken over. 🤖");
     } else {
-
-        console.log("⚖️ DRAW!");
-        console.log("Neither side won the battle.");
-        console.log("🔁 Type game() to settle it!");
+        console.log("⚖️ DRAW! Neither side won the battle.");
     }
-
-    console.log("");
-    console.log("🎮 Type game() to play again.");
 }
