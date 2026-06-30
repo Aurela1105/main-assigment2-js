@@ -160,3 +160,12 @@ Choose your weapon:
     console.log("");
     console.log("🎮 Type game() to play again.");
 }
+alert(
+    "👋 Welcome to ROCK, PAPER, SCISSORS Game!\n\n" +
+    "⚠️ IMPORTANT: This game runs entirely in the browser Console.\n" +
+    "Please open your Developer Tools Console to see your feedback and instructions:\n\n" +
+    "💻 Windows/Linux: Press F12 or Ctrl + Shift + J\n" +
+    "🍎 Mac: Press Cmd + Option + J\n\n" +
+    "Press OK after opening the Console!"
+console.log("🎮 Type game() to play!");
+
