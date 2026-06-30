@@ -12,7 +12,7 @@ function capitalize(word) {
 function playRound(playerSelection, computerSelection) {
 
     const player = playerSelection.toLowerCase().trim();
-    const computer = computerSelection.toLowerCase().trim();
+    const computer = computerSelection.toLowerCase();
 
     if (player === computer) {
         return "Tie";
